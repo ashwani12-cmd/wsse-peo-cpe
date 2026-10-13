@@ -1,0 +1,15 @@
+# Raw trajectory dumps and cached-numpy trajectories: too large for a
+# normal git repo (several files exceed GitHub's 100MB hard limit).
+# These stay local / go to a data archive (e.g. Zenodo) separately.
+*.lammpstrj
+*.npz
+
+# LAMMPS dump/log noise from job arrays, safe to regenerate from inputs
+*.lammpsdump
+
+# Python bytecode cache
+__pycache__/
+*.pyc
+
+# Generated archives (regenerable from their source files)
+*.zip

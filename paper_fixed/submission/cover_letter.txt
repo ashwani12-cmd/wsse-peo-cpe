@@ -1,0 +1,72 @@
+Dear Editors,
+
+I am submitting the manuscript "Obstruction, Chain Templating, and the
+Limits of Janus Face Selectivity at a WSSe Monolayer in PEO/LiTFSI
+Composite Polymer Electrolytes: An Atomistic Molecular Dynamics Study
+with Causal and Null Controls" for consideration as a research article in
+the Journal of Molecular Liquids.
+
+The work is an all-atom molecular dynamics study of a Janus WSSe
+monolayer embedded in a molten poly(ethylene oxide)/LiTFSI electrolyte at
+400 K, above the PEO melting point, paired with a filler-free reference
+system and a battery of controls (a null chemistry control, a causal
+chemistry-swap control, and two independently re-packed replicas) built
+to test, rather than assume, the causal origin of any interfacial
+signal.
+
+The principal, controlled result is that the WSSe sheet obstructs
+transport and templates polymer structure. Against a matched filler-free
+system, in-plane Li+ and TFSI- mobility fall by 24% and 18%
+respectively while the Li-O coordination shell is unchanged, showing
+that the effect is structural obstruction rather than a chemical
+perturbation; PEO chains template parallel to the sheet within ~7 A
+where the control's own slab interior stays flat, confirming genuine
+filler-induced templating rather than a free-surface artefact. The
+sheet spans the full periodic cross-section of the cell, so cross-plane
+transport is not merely slowed but arrested, with a net of
+approximately one Li+ traversing the sheet in 30 ns.
+
+We also tested, and did not confirm, a face-selectivity hypothesis
+motivated by gas-phase DFT studies on Janus transition-metal
+dichalcogenides, which report that the Se-terminated face binds
+adsorbates more strongly than the S face in vacuum. A single production
+trajectory shows a Se-face enrichment of up to 1.5x (3.4-5.0 sigma), but
+this does not survive the control battery: a null control where both
+faces are made chemically identical reproduces enrichment ratios
+(1.06-1.16) comparable in size to the published effect; a causal control
+that swaps which face carries which chemistry leaves the enrichment on
+the same geometric face rather than following the swapped chemistry; and
+two independent repacked replicas disagree with each other on the sign
+of the effect. We report this as a tested and falsified hypothesis,
+together with the control battery that falsifies it, rather than as a
+confirmed result -- both because it is the honest conclusion and because
+it is, we believe, a useful worked example of why a single-trajectory
+face-population count on a thermally corrugated, finite-sampled 2D sheet
+needs a null and a causal control before being reported as a chemical
+effect.
+
+Two further results corroborate the simulation's reliability
+independently of either claim above: the anion-to-cation diffusivity
+ratio D_TFSI/D_Li = 2.65 and the ideal Nernst-Einstein transference
+number t+ = 0.27 reproduce the known behaviour of neat PEO/LiTFSI and
+validate the charge-scaled force field.
+
+I have been explicit about the limits of the study. The monolayer spans
+the full periodic cross-section of the simulation cell, so it represents
+the complete-blocking limit rather than a dispersed composite, and no
+out-of-plane diffusion coefficient is defined for this geometry; the
+manuscript states this and reports cross-plane blocking directly instead.
+
+The manuscript is original, has not been published elsewhere, and is not
+under consideration by another journal. I am the sole author and have no
+competing interests to declare.
+
+Thank you for your consideration.
+
+Yours sincerely,
+
+Ashwani Kushwaha
+Department of Mechanical Engineering
+Indian Institute of Technology Bombay
+Mumbai 400076, India
+ashwani12@iitb.ac.in

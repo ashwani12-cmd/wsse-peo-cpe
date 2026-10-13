@@ -1,0 +1,5 @@
+mpirun: error while loading shared libraries: /home/apps/openmpi-4.1.4/lib/libopen-pal.so.40: cannot read file data: Input/output error
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.001s

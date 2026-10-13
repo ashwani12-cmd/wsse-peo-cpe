@@ -1,0 +1,156 @@
+units           real
+atom_style      full
+boundary        p p p
+processors      4 4 3
+timestep        1.0
+
+# ---- ALL styles BEFORE read_data ----
+pair_style      hybrid/overlay sw/mod lj/cut/coul/long 12.0 12.0
+bond_style      harmonic
+angle_style     harmonic
+dihedral_style  opls
+improper_style  none
+comm_modify     cutoff 20.0
+kspace_style    pppm 1.0e-4
+
+read_data       equil.data
+special_bonds   lj/coul 0.0 0.0 0.5
+
+pair_coeff * * sw/mod tmd.sw.mod NULL NULL NULL NULL NULL NULL NULL NULL NULL W S Se
+pair_coeff  1  1  lj/cut/coul/long  0.0660  3.5000
+pair_coeff  2  2  lj/cut/coul/long  0.0300  2.5000
+pair_coeff  3  3  lj/cut/coul/long  0.1200  2.9000
+pair_coeff  4  4  lj/cut/coul/long  0.0180  2.1260
+pair_coeff  5  5  lj/cut/coul/long  0.1700  3.2500
+pair_coeff  6  6  lj/cut/coul/long  0.2500  3.5500
+pair_coeff  7  7  lj/cut/coul/long  0.2100  2.9600
+pair_coeff  8  8  lj/cut/coul/long  0.0660  3.5000
+pair_coeff  9  9  lj/cut/coul/long  0.0530  2.9500
+pair_coeff 10 10  lj/cut/coul/long  0.0570  2.7340
+pair_coeff 11 11  lj/cut/coul/long  0.2740  3.5940
+pair_coeff 12 12  lj/cut/coul/long  0.2910  3.7460
+pair_coeff  1 10  lj/cut/coul/long  0.0613  3.1170
+pair_coeff  1 11  lj/cut/coul/long  0.1345  3.5470
+pair_coeff  1 12  lj/cut/coul/long  0.1386  3.6230
+pair_coeff  2 10  lj/cut/coul/long  0.0414  2.6170
+pair_coeff  2 11  lj/cut/coul/long  0.0907  3.0470
+pair_coeff  2 12  lj/cut/coul/long  0.0934  3.1230
+pair_coeff  3 10  lj/cut/coul/long  0.0827  2.8170
+pair_coeff  3 11  lj/cut/coul/long  0.1814  3.2470
+pair_coeff  3 12  lj/cut/coul/long  0.1868  3.3230
+pair_coeff  4 10  lj/cut/coul/long  0.0320  2.4300
+pair_coeff  4 11  lj/cut/coul/long  0.0702  2.8600
+pair_coeff  4 12  lj/cut/coul/long  0.0724  2.9360
+pair_coeff  5 10  lj/cut/coul/long  0.0984  2.9920
+pair_coeff  5 11  lj/cut/coul/long  0.2158  3.4220
+pair_coeff  5 12  lj/cut/coul/long  0.2224  3.4980
+pair_coeff  6 10  lj/cut/coul/long  0.1194  3.1420
+pair_coeff  6 11  lj/cut/coul/long  0.2617  3.5720
+pair_coeff  6 12  lj/cut/coul/long  0.2697  3.6480
+pair_coeff  7 10  lj/cut/coul/long  0.1094  2.8470
+pair_coeff  7 11  lj/cut/coul/long  0.2399  3.2770
+pair_coeff  7 12  lj/cut/coul/long  0.2472  3.3530
+pair_coeff  8 10  lj/cut/coul/long  0.0613  3.1170
+pair_coeff  8 11  lj/cut/coul/long  0.1345  3.5470
+pair_coeff  8 12  lj/cut/coul/long  0.1386  3.6230
+pair_coeff  9 10  lj/cut/coul/long  0.0550  2.8420
+pair_coeff  9 11  lj/cut/coul/long  0.1205  3.2720
+pair_coeff  9 12  lj/cut/coul/long  0.1242  3.3480
+pair_modify mix arithmetic
+kspace_modify mesh 32 32 64 order 6
+
+bond_coeff  1   268.0  1.5290
+bond_coeff  2   340.0  1.0900
+bond_coeff  3   320.0  1.4100
+bond_coeff  4   361.0  1.5700
+bond_coeff  5   637.0  1.4370
+bond_coeff  6   272.0  1.8180
+bond_coeff  7   367.0  1.3230
+angle_coeff  1   33.0  107.8
+angle_coeff  2   37.5  110.7
+angle_coeff  3   35.0  109.5
+angle_coeff  4   50.0  109.5
+angle_coeff  5   60.0  109.5
+angle_coeff  6   35.0  125.6
+angle_coeff  7   80.0  113.6
+angle_coeff  8   55.0  100.2
+angle_coeff  9   90.0  118.5
+angle_coeff 10   72.0  106.7
+angle_coeff 11   55.0  111.7
+angle_coeff 12   55.0  107.1
+dihedral_coeff  1   0.0000  0.0000  0.3000  0.0000
+dihedral_coeff  2   0.0000  0.0000  0.4680  0.0000
+dihedral_coeff  3   0.6500 -0.2500  0.6700  0.0000
+dihedral_coeff  4   0.0000  0.0000  0.7600  0.0000
+dihedral_coeff  5   0.0000  0.0000  1.1790  0.0000
+dihedral_coeff  6   0.6500 -0.2500  0.6700  0.0000
+special_bonds lj/coul 0.0 0.0 0.5
+
+group  WSSe     type 10 11 12
+group  PEO      type 1 2 3
+group  Li       type 4
+group  TFSI     type 5 6 7 8 9
+group  polymer  type 1 2 3 4 5 6 7 8 9
+
+neighbor        2.0  bin
+neigh_modify    every 1 delay 0 check yes
+
+fix  recenter_wsse  WSSe  recenter  INIT  INIT  75.9  units box shift all
+
+# =====================================================================
+# REPLICA 2: independent packing via a 600 K re-melt (seed 31337).
+# Same preparation protocol as the published run (run.in stages 2-3),
+# branched from the same equilibrated state with a different seed, so
+# the interfacial PEO layer and the near-face ion set are a NEW
+# realization. Reservoir populations stay 31/31 -- the sheet spans the
+# full cross-section, so no protocol can exchange them -- but Li+ are
+# indistinguishable, so a fresh configuration is what independence means
+# for this observable.
+# =====================================================================
+print ">>> STAGE A: re-melt 400 -> 600 K (2 ns), seed 31337"
+velocity  all  create  400.0  31337  dist gaussian  rot yes  mom yes
+fix  melt  polymer  nvt  temp  400.0  600.0  100.0
+fix  spr   WSSe     spring/self  10.0
+thermo  2000
+thermo_style  custom  step  temp  press  density  pe  ke
+run  2000000
+write_data  melt.data
+unfix  melt
+unfix  spr
+
+print ">>> STAGE B: cool 600 -> 400 K (2 ns)"
+fix  cool  polymer  nvt  temp  600.0  400.0  100.0
+fix  spr   WSSe     spring/self  10.0
+run  2000000
+write_data  cool.data
+unfix  cool
+unfix  spr
+
+print ">>> STAGE C: re-equilibrate 400 K (5 ns)"
+fix  eq  all  nvt  temp  400.0  400.0  100.0
+variable  rho  equal  density
+fix  rho_log  all  ave/time  5000  1  5000  v_rho  file  density_equil.dat
+run  5000000
+write_data    equil_rep.data
+write_restart equil_rep.restart
+unfix  eq
+unfix  rho_log
+
+print ">>> NVT Production 400 K (30 ns)"
+fix  nvt_prod  all  nvt  temp  400.0  400.0  100.0
+compute  msd_Li  Li  msd  com yes
+fix  out_msd  Li  ave/time  500  1  500  c_msd_Li[4]  file  msd_Li.dat  title1 "# Step MSD"
+compute  rdf_LiO  all  rdf  200  4 3
+fix  out_rdf  all  ave/time  10000  100  1000000  c_rdf_LiO[*]  file  rdf_LiO.dat  mode vector
+compute  rdf_LiWSSe  all  rdf  200  4 11  4 12
+fix  out_rdfW  all  ave/time  10000  100  1000000  c_rdf_LiWSSe[*]  file  rdf_LiWSSe.dat  mode vector
+compute  cZ  all  chunk/atom  bin/1d  z  0.0  1.0  units box
+fix  out_rhoZ  all  ave/chunk  5000  200  1000000  cZ  density/mass  file  density_z.dat
+dump  d_prod  all  custom  50000  prod.lammpstrj  id mol type x y z
+dump_modify  d_prod  sort id
+thermo  10000
+thermo_style  custom  step  temp  press  density  pe  ke  c_msd_Li[4]
+run  30000000
+write_data    prod_end.data
+write_restart prod_end.restart
+print ">>> ALL DONE"

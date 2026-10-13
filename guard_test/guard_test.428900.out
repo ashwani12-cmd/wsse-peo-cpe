@@ -1,0 +1,6 @@
+=== node: rmcn042  job: 428900  restart_count: 0 ===
+=== guard passed, launching 48-rank mpirun ===
+=== mpirun exit: 0 ===
+Neighbor list builds = 0
+Dangerous builds = 0
+Total wall time: 0:00:00

@@ -1,0 +1,61 @@
+% =====================================================================
+% REWRITTEN_PASSAGES.tex
+%
+% Drop-in replacements for the three passages carrying stale numbers,
+% marked in main.tex with "% ==== STALE NUMBERS -- MUST BE REWRITTEN".
+%
+% Every figure quoted below is reproducible from:
+%   analyze_faces_3d.py          (face statistics, 3D distances)
+%   npt_shrunk_restart/prod.lammpstrj, rdf_LiWSSe.dat, density_z.dat
+%
+% NOTE ON SCOPE -------------------------------------------------------
+% Passages 1 and 3 (abstract, conclusion) also carried the claim that
+% D_xy/D_z = 2.4 measures a material transport anisotropy. That claim
+% cannot stand alongside the simulation geometry:
+%   * the WSSe sheet spans the full 40 x 40 A periodic cross-section, so
+%     it has no edges for Li+ to detour around;
+%   * the cell contains ~12 A of vacuum at each z boundary, so the two
+%     electrolyte regions are not connected through the periodic image
+%     either;
+%   * Li+ populations on the two sides go 31/31 -> 32/30 over 30 ns,
+%     changing in only 12 of 600 frames (~1 net crossing);
+%   * MSD_z is saturating toward the slab confinement limit, not
+%     diffusing: beta_z falls from 0.60 to 0.23 by 15 ns, against a
+%     confinement plateau of W^2/6 ~ 94 A^2 for the ~24 A S-side slab
+%     with MSD_z already at 58 A^2.
+% D_z is therefore not a diffusion coefficient and D_xy/D_z grows
+% without bound with trajectory length. The rewrites below state the
+% stronger and defensible result instead: cross-plane transport is
+% blocked outright. Revert these sentences only if you intend to defend
+% the ratio to a referee.
+% =====================================================================
+
+
+% =====================================================================
+% PASSAGE 1 -- ABSTRACT  (replaces the paragraph inside \begin{abstract})
+% =====================================================================
+
+Two-dimensional fillers have emerged as a promising route to enhance ion transport and mechanical stability in polymer-based composite polymer electrolytes (CPEs) for solid-state lithium batteries. Janus transition-metal dichalcogenides such as \WSSe, whose two faces present distinct chemical environments (S and Se), introduce a built-in out-of-plane polarity that may further bias Li$^+$ distribution and transport at the filler--polymer interface. Here we report an all-atom molecular dynamics study of a single Janus \WSSe monolayer embedded in a poly(ethylene oxide)/lithium bis(trifluoromethane)sulfonyl)imide (PEO/\LiTFSI) matrix (ether-oxygen-to-Li ratio EO:Li $=$ 16:1) at $400$~K, combining the modified Stillinger--Weber potential for \WSSe with the all-atom OPLS-AA force field (Li$^+$ charge scaled to $0.75$) for the polymer electrolyte. The sheet spans the full periodic cross-section of the cell, so it partitions the electrolyte into two slabs that communicate only around it. Over a $30$~ns production trajectory we extract: (i) in-plane Li$^+$ self-diffusion together with the rate of cross-plane exchange, (ii) the radial distribution function and coordination number of Li$^+$ with ether oxygens, (iii) the $z$-resolved Li$^+$ density profile around the sheet, and (iv) face-resolved Li$^+$ coordination computed from true three-dimensional Li$^+$--chalcogen distances. Li$^+$ exhibits the canonical $\sim6$-fold ether-oxygen coordination at $2.13$~\AA, in close agreement with prior experimental and computational reports, validating the force-field setup. In-plane motion remains sub-diffusive over the accessible window, with an apparent $\Dxy = 4.4\times10^{-7}$~cm$^2$/s that falls within the range reported for PEO/\LiTFSI under comparable charge-scaled protocols; cross-plane transport, by contrast, is not merely slowed but arrested, with a net of approximately one Li$^+$ traversing the sheet in $30$~ns and an out-of-plane mean-squared displacement that saturates toward the confinement limit of the electrolyte slab rather than growing diffusively. The Janus chemistry nonetheless imprints itself on the interfacial cation distribution: Li$^+$ coordination within $5$~\AA{} of the Se-face exceeds that of the S-face by a factor of $1.5$ ($3.4\sigma$), an enrichment confined to the first interfacial shell and recovered consistently from two independent estimators. No Li$^+$ approaches either face more closely than $3.4$~\AA{} at any point in the trajectory, the cation retaining its full ether-oxygen solvation shell throughout. These results quantify how an impermeable Janus 2D filler reshapes Li$^+$ distribution and transport in a CPE, and motivate experimental synthesis of Janus-TMD-reinforced electrolytes with chemically asymmetric interphases.
+
+
+% =====================================================================
+% PASSAGE 2 -- SECTION 3.3  (replaces all three paragraphs of
+% \subsection{Janus-face-selective Li$^+$ distribution}, i.e. the
+% z-density paragraph, the contact-counting paragraph, and the
+% "novel point" paragraph)
+% =====================================================================
+
+The spatial distribution of Li$^+$ relative to the \WSSe sheet carries the signature of the Janus chemistry. \Fig{fig:zdensity} shows the $z$-resolved Li$^+$ density profile, with the origin at the sheet midplane. The profile is broadly symmetric about the sheet, confirming that the \texttt{recenter} protocol maintained comparable polymer slabs on both faces.
+
+Quantifying the face preference requires care, because the sheet is not flat. At $400$~K the monolayer ripples with an instantaneous out-of-plane amplitude of $\approx1.9$~\AA{} rms, so the $z$-ranges spanned by the S and Se sublayers overlap over $\approx10$~\AA{} --- wider than the interfacial separations of interest. A face assignment based on a $z$-window about the mean plane of each sublayer therefore does not isolate a face, and mixes in ions that are laterally remote from any chalcogen. We instead assign every Li$^+$ by its true three-dimensional minimum distance to the nearest S and nearest Se atom, with in-plane periodic images included (\fig{fig:contacts}, Table~\ref{tab:contacts}).
+
+So resolved, the first interfacial Li$^+$ shell peaks at $\approx6.4$~\AA{} from \emph{both} faces; the two faces differ in the population of that shell, not in its position. Within $5$~\AA{} the Se-face holds $0.79 \pm 0.08$ Li$^+$ per frame against $0.49 \pm 0.04$ for the S-face, an excess of $0.30 \pm 0.09$ corresponding to a $1.6$-fold enrichment at $3.4\sigma$. The Li--S and Li--Se radial distribution functions accumulated independently over the production run give the same answer, a ratio of $1.52$ at $3.4\sigma$. The enrichment is confined to the first shell: it is present but less well sampled at $r_c = 6$~\AA{} ($2.4\sigma$) and $8$~\AA{} ($1.8\sigma$), where the effective number of independent samples falls to $22$ and $7$ respectively, and it reverses beyond $\approx7.4$~\AA{} as the profile crosses over to bulk electrolyte. Unlike a cutoff-dependent artefact, the excess keeps a consistent sign across every cutoff and both estimators. The direction of the effect agrees with gas-phase DFT for Janus chalcogenides, where MoSSe, ZrSSe and related monolayers physisorb small molecules and atoms more strongly on the Se-terminated surface \cite{zhang_langmuir_2024_zrsse, sharma_acsanm_2026_mosse, bounbaa_est_2025_mosy}; the selectivity is usually attributed to the larger radius, higher polarisability and softer electronic environment of Se relative to S \cite{ahmad_apsusc_2023_wsse}. We note that the opposite ordering has been reported for the Janus carbo-chalcogenide Nb$_2$CSSe \cite{rivera_est_2026_nb2csse}, so the trend is not universal across Janus families.
+
+Two features of the interfacial regime deserve emphasis. First, the closest approach of any Li$^+$ to either face over the whole trajectory is $3.40$~\AA{} (S) and $3.48$~\AA{} (Se): no cation ever makes direct chalcogen contact. This is the expected consequence of the solvation structure established in \sect{sec:res_lio} --- Li$^+$ carries $\approx6$ ether oxygens and cannot shed them to reach the surface on these timescales. The Janus preference reported here is therefore a bias in \emph{solvated-cation partitioning} near the interface, not a difference in direct adsorption energy of the kind computed by gas-phase DFT. Second, the effect is modest in size and rests on the small subpopulation of Li$^+$ that visits the interface at all ($28$ of $62$ ions ever come within $5$~\AA{} of the Se-face). The physical reading is that PEO solvation attenuates but does not eliminate the chemical contrast between the two faces. Establishing the effect at higher confidence would require either substantially longer sampling or independent replicate configurations; the present trajectory supports the trend and its direction, not a precise magnitude.
+
+
+% =====================================================================
+% PASSAGE 3 -- CONCLUSION
+% =====================================================================
+
+We have presented an atomistic molecular dynamics study of a Janus \WSSe monolayer embedded as a 2D filler in a PEO/\LiTFSI composite polymer electrolyte at $400$~K. Three results emerge from $30$~ns of production sampling. First, the standard PEO ether-oxygen solvation of Li$^+$ ($\sim6$ oxygens at $2.13$~\AA) is preserved in the composite, confirming that the filler does not disrupt the bulk conduction mechanism and supporting the cross-term parameterisation. Second, because the sheet spans the full periodic cross-section of the cell, it does not merely bias cross-plane transport but blocks it: over $30$~ns a net of approximately one Li$^+$ traverses the sheet, and the out-of-plane mean-squared displacement saturates toward the confinement limit set by the electrolyte slab instead of growing diffusively, while in-plane motion continues with an apparent $\Dxy = 4.35 \times 10^{-7}$~cm$^2$/s consistent with literature values for the neat electrolyte. An impermeable 2D filler is thus best described as a barrier that redirects Li$^+$ flux into the plane, rather than as a medium with a finite out-of-plane diffusivity. Third, the Janus S/Se chemistry imprints itself on the interfacial Li$^+$ distribution: within $5$~\AA{} the Se-face is enriched by a factor of $1.5$ relative to the S-face ($3.4\sigma$), consistently in sign across cutoffs and across two independent estimators, and confined to the first interfacial shell. Because no Li$^+$ approaches either face within $3.4$~\AA, this selectivity operates on fully solvated cations rather than through direct chalcogen contact --- a regime the gas-phase DFT literature cannot access. Taken together, these results delineate how an impermeable Janus 2D filler reshapes Li$^+$ distribution and transport in a CPE. Quantifying the dependence on filler loading, orientation and sheet size, and establishing the face selectivity at higher statistical confidence, are natural next steps; a filler-free reference simulation under an identical protocol would in particular allow the in-plane transport to be attributed to the filler.

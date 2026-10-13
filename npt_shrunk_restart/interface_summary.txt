@@ -1,0 +1,69 @@
+========================================================================
+INTERFACIAL STRUCTURE (signed z from WSSe midplane)
+  S-face plane at z = +1.63 A, Se-face plane at z = -1.47 A
+========================================================================
+
+PEO chain orientation P2 (negative = chains lie parallel to sheet):
+     z (A)       P2   n vectors
+     -13.5    0.014        9531
+     -12.5   -0.019        9319
+     -11.5   -0.041        9434
+     -10.5   -0.034        9859
+      -9.5    0.055       10194
+      -8.5    0.015       10642
+      -7.5   -0.126       12895
+      -6.5   -0.164        9276
+      -5.5   -0.127        6113
+      -4.5   -0.126        5065
+      -3.5   -0.120        3984
+      -2.5   -0.125        3007
+       2.5    0.045        1521
+       3.5   -0.168        3390
+       4.5   -0.234        8663
+       5.5   -0.119        9387
+       6.5    0.019        8894
+       7.5   -0.010        9647
+       8.5   -0.051       10247
+       9.5   -0.029       10774
+      10.5    0.006       10624
+      11.5    0.016       10259
+      12.5   -0.004       10025
+      13.5   -0.013        9780
+  bulk reference (18<|z|<28): P2 = -0.038
+
+Li+ ether-oxygen coordination vs z:
+     z (A)   n_coord   samples
+     -13.5      6.13       908
+     -12.5      6.13       725
+     -11.5      6.14       584
+     -10.5      6.09       742
+      -9.5      6.18      1361
+      -8.5      6.18      1491
+      -7.5      6.07      1067
+      -6.5      6.03       524
+      -5.5      6.09       411
+      -4.5      6.16       360
+      -3.5      6.14       314
+      -2.5      5.80       157
+      -1.5      5.61        56
+       3.5      6.11        55
+       4.5      6.04       230
+       5.5      6.18       636
+       6.5      6.15      1117
+       7.5      6.14       820
+       8.5      6.09       706
+       9.5      6.16       932
+      10.5      6.15      1159
+      11.5      6.16      1102
+      12.5      6.12       920
+      13.5      6.10       768
+  bulk reference (18<|z|<28): n_coord = 6.09
+
+INTERPRETATION GUIDE
+  * P2 markedly below the bulk value within ~10 A of the sheet
+    means the filler templates chain alignment parallel to its
+    plane -- the 'orientational template' asserted in the intro.
+  * n_coord staying near its bulk value up to the interface means
+    the filler perturbs the solvation shell only weakly, which is
+    the structural counterpart of the Se-face preference acting on
+    fully solvated cations.

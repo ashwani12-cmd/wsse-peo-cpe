@@ -1,0 +1,188 @@
+# =====================================================================
+# run_control.in -- FILLER-FREE REFERENCE SIMULATION
+#
+# Purpose: the composite paper reports in-plane Li+ diffusivity, Li+
+# solvation structure and PEO chain orientation, but without a reference
+# system none of it can be ATTRIBUTED to the WSSe filler. This run
+# supplies that reference: the identical electrolyte, identical force
+# field, identical thermostat and identical sampling protocol, with the
+# WSSe monolayer removed and nothing else changed.
+#
+# CONSTRUCTION
+# Starts from prod_end.data (the end of the 30 ns composite production,
+# so the polymer is already well relaxed) and deletes the 432 WSSe atoms.
+# The WSSe atoms carry zero partial charge, so deletion leaves the system
+# exactly charge neutral -- no counter-charge adjustment is needed.
+# Remaining: 6592 atoms (40 PEO 20-mers, 62 Li+, 62 TFSI-), EO:Li = 16:1.
+#
+# The deletion leaves a void where the sheet was; the 10 ns NVT
+# equilibration below lets the two electrolyte slabs merge and the void
+# collapse. The cell keeps vacuum at the z boundaries, exactly as in the
+# composite run, so the slab relaxes to its own equilibrium density
+# without an imposed box change. This is deliberate: the control must
+# differ from the composite in ONE variable only.
+#
+# Atom types 10-12 no longer have any atoms but remain declared in the
+# data file, so LJ coefficients are still defined for them (harmless).
+# The sw/mod pair style is dropped entirely since no W/S/Se remain.
+#
+# COST: 6592 atoms, ~23 ns/day on 48 cores -> 40 ns total in ~1.8 days.
+#       Fits one 4-day job on the 'small' partition.
+#
+# ANALYSIS: the scripts in ../npt_shrunk_restart/ run unchanged on the
+# outputs (same 50 ps dump spacing, same file names). Face-resolved
+# analyses obviously do not apply; the comparisons that matter are
+#   analyze_transport.py  -> D_xy(Li+), D_xy(TFSI-), ratio, t+
+#   analyze_interface.py  -> P2 profile (should be flat at the bulk value)
+#   the Li-O RDF          -> n_coord, peak position
+# =====================================================================
+
+units           real
+atom_style      full
+boundary        p p p
+timestep        1.0
+processors      4 4 3
+
+# Styles must precede read_data: prod_end.data carries Bond, Angle and
+# Dihedral Coeffs sections. The explicit *_coeff commands further down
+# restate the same values, so the force field is identical to the
+# composite run whichever source LAMMPS takes them from.
+pair_style      lj/cut/coul/long 12.0 12.0
+bond_style      harmonic
+angle_style     harmonic
+dihedral_style  opls
+improper_style  none
+kspace_style    pppm 1.0e-4
+
+read_data       prod_end.data
+
+# ---- force field coefficients (identical to the composite run)
+
+pair_coeff  1  1  0.0660  3.5000
+pair_coeff  2  2  0.0300  2.5000
+pair_coeff  3  3  0.1200  2.9000
+pair_coeff  4  4  0.0180  2.1260
+pair_coeff  5  5  0.1700  3.2500
+pair_coeff  6  6  0.2500  3.5500
+pair_coeff  7  7  0.2100  2.9600
+pair_coeff  8  8  0.0660  3.5000
+pair_coeff  9  9  0.0530  2.9500
+# types 10-12 retain coefficients although no atoms of these types remain
+pair_coeff 10 10  0.0570  2.7340
+pair_coeff 11 11  0.2740  3.5940
+pair_coeff 12 12  0.2910  3.7460
+pair_modify mix arithmetic
+# match the composite run's k-space settings exactly: left to choose for
+# itself PPPM picks a coarser 12x12x20 mesh here (relative force accuracy
+# 6e-5) than the 32x32x64 order-6 mesh used for the composite (2e-7).
+# A control must not differ in numerical accuracy.
+kspace_modify mesh 32 32 64 order 6
+
+bond_coeff  1   268.0  1.5290
+bond_coeff  2   340.0  1.0900
+bond_coeff  3   320.0  1.4100
+bond_coeff  4   361.0  1.5700
+bond_coeff  5   637.0  1.4370
+bond_coeff  6   272.0  1.8180
+bond_coeff  7   367.0  1.3230
+
+angle_coeff  1   33.0  107.8
+angle_coeff  2   37.5  110.7
+angle_coeff  3   35.0  109.5
+angle_coeff  4   50.0  109.5
+angle_coeff  5   60.0  109.5
+angle_coeff  6   35.0  125.6
+angle_coeff  7   80.0  113.6
+angle_coeff  8   55.0  100.2
+angle_coeff  9   90.0  118.5
+angle_coeff 10   72.0  106.7
+angle_coeff 11   55.0  111.7
+angle_coeff 12   55.0  107.1
+
+dihedral_coeff  1   0.0000  0.0000  0.3000  0.0000
+dihedral_coeff  2   0.0000  0.0000  0.4680  0.0000
+dihedral_coeff  3   0.6500 -0.2500  0.6700  0.0000
+dihedral_coeff  4   0.0000  0.0000  0.7600  0.0000
+dihedral_coeff  5   0.0000  0.0000  1.1790  0.0000
+dihedral_coeff  6   0.6500 -0.2500  0.6700  0.0000
+
+special_bonds lj/coul 0.0 0.0 0.5
+
+group  WSSe  type 10 11 12
+group  PEO   type 1 2 3
+group  Li    type 4
+group  TFSI  type 5 6 7 8 9
+
+print ">>> deleting WSSe monolayer (filler-free control)"
+delete_atoms  group WSSe  compress no
+print ">>> WSSe removed"
+
+comm_modify cutoff 20.0
+
+neighbor      2.0  bin
+neigh_modify  every 1 delay 0 check yes
+
+# velocities are inherited from prod_end.data (already equilibrated at 400 K);
+# deliberately NOT re-created, to avoid a thermal transient at t=0
+
+# keep the free-standing slab centred in z so the density profile and any
+# z-resolved analysis stay comparable with the composite run
+# NOTE: LAMMPS warns that fix recenter should follow the integration fix.
+# The composite run (run_restart.in) defines its recenter fix in exactly
+# this position, and the fix applies only a rigid translation, which under
+# periodic boundaries changes no force or observable. The ordering is kept
+# identical to the composite deliberately.
+fix  recenter_slab  all  recenter  INIT  INIT  75.9  units box shift all
+
+# =====================================================================
+# STAGE 1 -- equilibration, 10 ns NVT at 400 K (void collapse + relax)
+# =====================================================================
+print ">>> Equilibration: 10 ns NVT 400 K"
+fix  nvt_eq  all  nvt  temp  400.0  400.0  100.0
+
+compute  cZeq  all  chunk/atom  bin/1d  z  0.0  1.0  units box
+fix  out_rho_eq  all  ave/chunk  5000 200 1000000  cZeq  density/mass &
+     file density_equil.dat
+
+thermo  10000
+thermo_style  custom  step  temp  press  density  pe  ke
+run  10000000
+
+unfix  out_rho_eq
+uncompute cZeq
+unfix  nvt_eq
+write_data    equil_control.data
+write_restart equil_control.restart
+print ">>> Equilibration done"
+
+# =====================================================================
+# STAGE 2 -- production, 30 ns NVT at 400 K
+#   outputs mirror the composite run exactly (same names, same cadence)
+# =====================================================================
+print ">>> Production: 30 ns NVT 400 K"
+fix  nvt_prod  all  nvt  temp  400.0  400.0  100.0
+
+compute  msd_Li  Li  msd  com yes
+fix  out_msd  Li  ave/time  500 1 500  c_msd_Li[4]  file msd_Li.dat &
+     title1 "# Step MSD"
+
+compute  rdf_LiO  all  rdf  200  4 3
+fix  out_rdf  all  ave/time  10000 100 1000000  c_rdf_LiO[*] &
+     file rdf_LiO.dat  mode vector
+
+compute  cZ  all  chunk/atom  bin/1d  z  0.0  1.0  units box
+fix  out_rhoZ  all  ave/chunk  5000 200 1000000  cZ  density/mass &
+     file density_z.dat
+
+# 50 ps dumping, identical to the composite run so the analysis scripts
+# in ../npt_shrunk_restart/ apply unchanged
+dump  d_prod  all  custom  50000  prod.lammpstrj  id mol type x y z
+dump_modify  d_prod  sort id
+
+thermo  10000
+thermo_style  custom  step  temp  press  density  pe  ke  c_msd_Li[4]
+run  30000000
+
+write_data    control_prod_end.data
+write_restart control_prod_end.restart
+print ">>> ALL DONE -- filler-free control complete"

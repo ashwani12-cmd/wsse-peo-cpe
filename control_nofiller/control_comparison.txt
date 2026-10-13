@@ -1,0 +1,28 @@
+
+============================================================================
+COMPOSITE vs FILLER-FREE CONTROL
+============================================================================
+observable                             composite       control       change
+----------------------------------------------------------------------------
+D_xy(Li+)  [1e-7 cm2/s]                     4.40          5.79       -24.0%
+D_xy(TFSI-) [1e-7 cm2/s]                   11.67         14.19       -17.8%
+D_TFSI / D_Li                               2.65          2.45        +8.2%
+ideal NE t+                                0.274         0.290        -5.5%
+Li-O peak position [A]                     2.130         2.130        +0.0%
+n_coord (r<3.5 A)                           6.13          6.16        -0.5%
+PEO P2, bulk                              -0.038        -0.080       +0.042
+PEO P2, 3-8 A from sheet                  -0.117        -0.003       -0.114
+----------------------------------------------------------------------------
+
+HOW TO READ THIS
+  * D_xy(Li+): a difference here is the filler's effect on in-plane
+    mobility. The composite is expected to be SLOWER if the filler
+    obstructs, or similar if it only blocks the cross-plane channel.
+  * n_coord and the Li-O peak should be UNCHANGED. If they are, the
+    claim that the filler is a structural rather than chemical
+    perturbation is established rather than asserted.
+  * P2 near the sheet vs the control's bulk value is the clean test
+    of templating: in the control there is no sheet, so its 'near'
+    and 'bulk' values should agree with each other.
+  * D_TFSI/D_Li in the control is the force-field validation against
+    neat PEO/LiTFSI literature, free of any filler contribution.

@@ -1,0 +1,60 @@
+==========================================================================
+Li+ RESIDENCE KINETICS AT THE TWO JANUS FACES
+  frame spacing 50 ps -> residence times quantised to 50 ps
+  600 frames over 30 ns
+==========================================================================
+
+--- cutoff r_c = 5 A ----------------------------------------
+    face  visits  ions      mean   median      max  occupancy
+       S     222    19      66ps     50ps    300ps      0.488
+      Se     332    28      71ps     50ps    300ps      0.788
+
+  visit-rate ratio  Se/S : 1.50
+  mean-residence ratio   : 1.08
+  occupancy ratio        : 1.61
+  -> Se enrichment tracks visit FREQUENCY more than duration
+
+  !! RESOLUTION WARNING: the median visit lasts a single
+     50 ps frame, so most episodes are unresolved in time.
+     Visit COUNT is then close to a restatement of
+     occupancy and the frequency-vs-duration split above
+     is NOT established by this data. Do not put this
+     decomposition in the paper without a fine-dump rerun
+     (2-5 ns from prod_end.restart, dump every 1-2 ps).
+
+--- cutoff r_c = 6 A ----------------------------------------
+    face  visits  ions      mean   median      max  occupancy
+       S     799    23     119ps     50ps   1150ps      3.165
+      Se     937    32     134ps     50ps   1350ps      4.180
+
+  visit-rate ratio  Se/S : 1.17
+  mean-residence ratio   : 1.13
+  occupancy ratio        : 1.32
+  -> Se enrichment tracks visit FREQUENCY more than duration
+
+  !! RESOLUTION WARNING: the median visit lasts a single
+     50 ps frame, so most episodes are unresolved in time.
+     Visit COUNT is then close to a restatement of
+     occupancy and the frequency-vs-duration split above
+     is NOT established by this data. Do not put this
+     decomposition in the paper without a fine-dump rerun
+     (2-5 ns from prod_end.restart, dump every 1-2 ps).
+
+--- cutoff r_c = 7 A ----------------------------------------
+    face  visits  ions      mean   median      max  occupancy
+       S     648    30     356ps    150ps   5500ps      7.685
+      Se     675    36     408ps    150ps   5800ps      9.187
+
+  visit-rate ratio  Se/S : 1.04
+  mean-residence ratio   : 1.15
+  occupancy ratio        : 1.20
+  -> Se enrichment tracks residence DURATION more than frequency
+
+READING THESE NUMBERS
+  'occupancy' is the mean number of Li+ in contact per frame and
+  must match Table 1 of the paper at the same cutoff -- it does,
+  which confirms the two analyses are consistent.
+  Decomposing occupancy = visit rate x mean residence separates a
+  thermodynamic preference (longer stays, deeper well) from a
+  kinetic/geometric one (more arrivals). With 50 ps resolution the
+  split is indicative; confirm it with a short fine-dump rerun.

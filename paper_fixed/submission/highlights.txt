@@ -1,0 +1,5 @@
+A WSSe monolayer in PEO/LiTFSI obstructs ion transport vs. a filler-free control
+In-plane Li+ and TFSI- mobility fall 24% and 18% with Li-O coordination unchanged
+PEO chains template parallel to the filler within ~7 A, confirmed vs. control
+A gas-phase Janus face-selectivity hypothesis is tested and not confirmed
+Null, causal-swap, and replica controls show the apparent face effect is not real

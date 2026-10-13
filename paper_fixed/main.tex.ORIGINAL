@@ -1,0 +1,271 @@
+% Copyright 2007, 2008, 2009 Elsevier Ltd
+\documentclass[review, 12pt]{elsarticle}
+
+%*******************************************************
+%% Add packages
+%*******************************************************
+\usepackage{extsizes}
+\usepackage[left=1.5cm, right=1.5cm, top=1.785cm, bottom=2.0cm]{geometry}
+\usepackage{balance}
+\usepackage{mathptmx}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage[format=plain,justification=justified,singlelinecheck=false,font={stretch=1.125,small,sf},labelfont=bf,labelsep=space]{caption}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+\usepackage{fnpos}
+\usepackage[english]{babel}
+\addto{\captionsenglish}{%
+  \renewcommand{\refname}{Notes and references}
+}
+\usepackage{array}
+\usepackage{droidsans}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{setspace}
+\usepackage[compact]{titlesec}
+\usepackage{hyperref}
+\usepackage{amsmath,amsthm, amssymb}
+\usepackage{gensymb}
+\usepackage{enumerate}
+\usepackage{subfig}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{array}
+\usepackage{braket}
+\usepackage{ulem}
+\usepackage{relsize}
+\usepackage{tabularx}
+\usepackage{bm}
+\definecolor{cream}{RGB}{222,217,201}
+
+%*******************************************************
+% Custom commands
+%*******************************************************
+\newcommand{\myfloatalign}{\centering}
+\renewcommand{\bold}[1]{\boldsymbol{#1}}
+\newcommand{\xt}{(\bold{x},t)}
+\newcommand{\lxt}{(x,t)}
+\renewcommand{\sp}[1]{\left({#1}\right)}
+\let\vaccent=\v
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\m}[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}}
+\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\avg}[1]{\left< #1 \right>}
+\let\underdot=\d
+\renewcommand{\d}[2]{\frac{d #1}{d #2}}
+\newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\pddm}[3]{\frac{\partial^2 #1}{{\partial #2} {\partial #3}}}
+\newcommand{\ashwani}[1]{{\color{red} #1}}
+\newcommand{\change}[1]{{\color{red} #1}}
+\newcommand{\fig}[1] {Fig.~\ref{#1}}
+\newcommand{\Fig}[1] {Figure~\ref{#1}}
+\newcommand{\figs}[1] {Figs.~\ref{#1}}
+\newcommand{\sect}[1] {Section~\ref{#1}}
+\newcommand{\eqn}[1] {Eq.~(\ref{#1})}
+
+% Paper-specific commands
+\newcommand{\DLi}{D_{\mathrm{Li}^+}}
+\newcommand{\Dxy}{D_{xy}}
+\newcommand{\Dz}{D_{z}}
+\newcommand{\WSSe}{WSSe\xspace}
+\newcommand{\LiTFSI}{LiTFSI\xspace}
+\newcommand{\Lip}{Li$^+$\xspace}
+
+\makeatletter
+\def\@author#1{\g@addto@macro\elsauthors{\normalsize%
+    \def\baselinestretch{1}%
+    \upshape\authorsep#1\unskip\textsuperscript{%
+      \ifx\@fnmark\@empty\else\unskip\sep\@fnmark\let\sep=,\fi
+      \ifx\@corref\@empty\else\unskip\sep\@corref\let\sep=,\fi
+      }%
+    \def\authorsep{\unskip,\space}%
+    \global\let\@fnmark\@empty
+    \global\let\@corref\@empty
+    \global\let\sep\@empty}%
+    \@eadauthor={#1}
+}
+\makeatother
+
+\doublespacing
+\journal{ACS Applied Energy Materials}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Janus-Face-Selective Li$^+$ Binding and Anisotropic Ion Transport in PEO/LiTFSI Composite Polymer Electrolytes Reinforced by WSSe Monolayer Fillers: An Atomistic Molecular Dynamics Study}
+
+\author[]{Ashwani Kushwaha}
+\ead{ashwani12@iitb.ac.in}
+% \author[bp]{Gy\"orgy B\'anhegyi\corref{cor1}}
+% \ead{gyorgy.banhegyi56@gmail.com}
+% \cortext[cor1]{Corresponding author}
+\address{Department of Mechanical Engineering, Indian Institute of Technology Bombay, Mumbai 400076, India}
+% \address[bp]{Independent Consultant, Budapest, Hungary}
+
+\date{\today}
+
+\begin{abstract}
+\noindent
+Two-dimensional fillers have emerged as a promising route to enhance ion transport and mechanical stability in polymer-based composite polymer electrolytes (CPEs) for solid-state lithium batteries. Janus transition-metal dichalcogenides such as \WSSe, whose two faces present distinct chemical environments (S and Se), introduce a built-in out-of-plane polarity that may further bias Li$^+$ distribution and transport at the filler--polymer interface. Here we report an all-atom molecular dynamics study of a single Janus \WSSe monolayer embedded in a poly(ethylene oxide)/lithium bis(trifluoromethane)sulfonyl)imide (PEO/\LiTFSI) matrix (ether-oxygen-to-Li ratio EO:Li $=$ 16:1) at $400$~K, combining the modified Stillinger--Weber potential for \WSSe with the all-atom OPLS-AA force field (Li$^+$ charge scaled to $0.75$) for the polymer electrolyte. Over a $30$~ns production trajectory we extract: (i) Li$^+$ self-diffusion split into in-plane and out-of-plane components, (ii) the radial distribution function and coordination number of Li$^+$ with ether oxygens, (iii) the z-resolved Li$^+$ density profile around the sheet, and (iv) face-resolved Li$^+$ contact statistics. Li$^+$ exhibits the canonical $\sim6$-fold ether-oxygen coordination at $\sim2.13$~\AA, in close agreement with prior experimental and computational reports, validating the force-field setup. Li$^+$ transport is strongly anisotropic, with $\Dxy/\Dz = 2.4$ ($\Dxy=4.4\times10^{-7}$ and $\Dz=1.8\times10^{-7}$~cm$^2$/s), establishing the impermeable WSSe layer as a directional ion-transport feature. Most strikingly, Li$^+$ accumulation within $3$~\AA{} of the Se-face exceeds that of the S-face by a factor of $\sim3.5$ (significance $6.2\sigma$), demonstrating that the Janus chemistry is imprinted on the local cation distribution even within a solvating polymer matrix. These findings establish atomistic design rules for asymmetric 2D fillers in composite polymer electrolytes and motivate experimental synthesis of Janus-TMD-reinforced CPEs for directional Li$^+$ transport.
+\end{abstract}
+
+\begin{keyword}
+Composite polymer electrolyte \sep Janus 2D materials \sep WSSe monolayer \sep PEO/LiTFSI \sep molecular dynamics \sep Li$^+$ transport anisotropy \sep solid-state batteries
+\end{keyword}
+
+\end{frontmatter}
+
+%% ════════════════════════════════════════════════════════
+\section{Introduction}\label{sec:intro}
+
+The push toward solid-state lithium batteries (SSLBs) has revived interest in polymer-based composite polymer electrolytes (CPEs) as a route to high energy density combined with mechanical resilience against lithium dendrite penetration \cite{nano_micro_letters_cpe_review}. Among polymer matrices, poly(ethylene oxide) (PEO) doped with lithium bis(trifluoromethane)sulfonyl)imide (\LiTFSI) is one of the most thoroughly characterised systems, owing to its strong Li$^+$ solvation by ether-oxygen lone pairs and the highly delocalised, weakly coordinating nature of the TFSI$^-$ anion \cite{he_jpcb_2020_polarity, marchiori_electrochim_2017}. Yet neat PEO/\LiTFSI exhibits two persistent limitations: a room-temperature ionic conductivity that is one to two orders of magnitude below liquid electrolytes, and a relatively low elastic modulus that limits its ability to suppress dendrite growth.
+
+\paragraph{Filler strategies in CPEs.} To overcome these limitations, a wide range of inorganic fillers have been incorporated into the PEO/salt matrix \cite{nano_micro_letters_cpe_review}. Early work focused on zero-dimensional oxide nanoparticles (e.g., SiO$_2$, TiO$_2$, Al$_2$O$_3$), which were shown by Croce et al. to enhance ionic conductivity by up to three orders of magnitude through suppression of PEO crystallinity. More recently, attention has shifted toward two-dimensional fillers --- including graphene oxide, MXenes (Ti$_3$C$_2$T$_x$), black phosphorus, and transition-metal dichalcogenides (TMDs) \cite{pan_nanoscale_adv_2019_mxene, rojaee_2d_bp}. The 2D geometry provides three key benefits over 0D analogues at equal loading: (i) a much larger polymer--filler interfacial area per unit mass, (ii) a long-range orientational template that can bias polymer chain alignment, and (iii) the ability to render the composite's transport properties anisotropic --- a feature that has been noted phenomenologically but rarely quantified at the atomistic level \cite{pan_nanoscale_adv_2019_mxene}.
+
+\paragraph{Janus 2D materials.} A more recent development is the experimental realisation of \textit{Janus} TMDs such as \WSSe, MoSSe, and MoSTe, where the two chalcogen layers are different. The resulting symmetry breaking produces a permanent out-of-plane electric dipole and a chemically asymmetric pair of surfaces \cite{lu_janus_natnano, zhang_janus_acs_nano}. First-principles density-functional theory (DFT) studies have shown that this asymmetry produces face-dependent adsorption behaviour: Janus ZrSSe and MoSSe display systematically stronger physisorption of gas molecules and nucleobases on the Se-terminated surface than on the S-terminated surface \cite{zrsse_dft_gas_sensing, mossse_dna_acsanm_2026}. For lithium specifically, single-Li adsorption on Janus monolayers (MoSSe, MoSTe, WSSe) shows distinct binding energies and migration barriers on the two faces \cite{nguyen_wsse_li_dft, mosy_dft_2025}, with the trend generally favouring the Se face --- although the opposite trend has been reported for Janus carbo-chalcogenides such as Nb$_2$CSSe \cite{nb2csse_anode_2026}. Whether this face selectivity \textit{survives} when the Janus filler is embedded within a polymer electrolyte --- where Li$^+$ is preferentially solvated by PEO ether oxygens rather than being exposed to a vacuum interface --- has, to our knowledge, not been investigated.
+
+\paragraph{This work.} We address this gap by reporting an atomistic molecular dynamics (MD) study of a single Janus \WSSe monolayer immersed in PEO/\LiTFSI at $400$~K (above the PEO melting point and within the practical operating window of SSLBs). The questions we address are: (1) Does the canonical PEO ether-oxygen solvation of Li$^+$ remain intact in the presence of the 2D filler, or is it disrupted? (2) Does Li$^+$ transport develop a measurable anisotropy due to the impermeable WSSe barrier? (3) Does the Janus S/Se asymmetry imprint itself on the local Li$^+$ distribution around the sheet, despite the intervening polymer solvation shell? We extract self-diffusion coefficients resolved into in-plane and out-of-plane components, Li-O radial distribution functions, z-resolved Li$^+$ density profiles relative to the WSSe midplane, and face-resolved Li$^+$ contact statistics with proper block-averaged error bars. The results provide the first quantitative atomistic picture of a Janus-TMD-reinforced composite polymer electrolyte and establish design rules for future directional ion-transport CPEs.
+
+%% ════════════════════════════════════════════════════════
+\section{Simulation Methodology}\label{sec:methods}
+
+\subsection{System composition and atom typing}
+The simulated system shown in figure ~\ref{fig:PEO_system} contains $7024$ atoms organised in three subsystems: (i) a $40 \times 40 \times 3.37$~\AA$^3$ Janus \WSSe monolayer ($144$ W, $144$ S, $144$ Se atoms; $12 \times 12$ supercell of the in-plane lattice constant $a=3.317$~\AA), built from the relaxed crystal structure with S occupying the top ($+z$) face and Se the bottom ($-z$) face, separated by a $3.15$~\AA{} interlayer gap; (ii) a PEO matrix consisting of $40$ chains each of $20$ monomer units (--CH$_2$--CH$_2$--O--), generated by an unbiased random-walk placement algorithm to produce realistic Gaussian coil statistics; and (iii) $62$ Li$^+$ and $62$ TFSI$^-$ ions giving an ether-oxygen-to-lithium ratio of EO:Li = $16{:}1$, representative of the optimal salt concentration for PEO/\LiTFSI \cite{marchiori_electrochim_2017}. The simulation cell employs periodic boundaries in all three directions with the WSSe sheet lying in the $xy$-plane centred at the box midplane in $z$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.3\textwidth]{figures/PEO-system.png}
+\caption{Equilibrated atomic structure of the PEO--LiTFSI polymer electrolyte
+in contact with a central Janus WSSe monolayer, with electrolyte on both faces
+of the layer. The Janus monolayer exposes a sulfur-terminated face on one side
+and a selenium-terminated face on the other. Carbon, hydrogen, oxygen, lithium,
+nitrogen, sulfur, fluorine, tungsten, and selenium atoms are shown in gray,
+white, red, lilac, dark blue, olive, light blue, blue, and green, respectively.}
+\label{fig:PEO_system}
+\end{figure}
+
+\subsection{Force fields}
+Intra-WSSe interactions were modelled with the modified Stillinger--Weber (SW) potential of Jiang \cite{jiang_sw_tmd_2019}, which has been extensively validated for thermal and mechanical properties of TMDs including the Janus subfamily. The PEO matrix and TFSI$^-$ anion were described using the all-atom OPLS-AA force field, with partial charges and bonded parameters taken from the standard parameter set. Following best practice for high-temperature MD of PEO/\LiTFSI \cite{he_jpcb_2020_polarity}, Li$^+$ and TFSI$^-$ partial charges were scaled by a factor of $0.75$ to compensate for the omission of explicit electronic polarisation, an approximation that has been shown to recover both the experimental Li$^+$ diffusivity and the correct $D_{\mathrm{TFSI}}/D_{\mathrm{Li}^+}$ ratio. Cross interactions between the WSSe atoms and the polymer/electrolyte atoms were generated using Lorentz--Berthelot mixing of UFF Lennard-Jones parameters for W, S, and Se, applied as a \texttt{hybrid/overlay} of the SW and \texttt{lj/cut/coul/long} pair styles. Long-range electrostatics were treated with the particle--particle particle--mesh (PPPM) solver with $10^{-4}$ accuracy. Special-bond exclusions were set to (0, 0, 0.5) for 1--2, 1--3, and 1--4 interactions, consistent with OPLS-AA conventions.
+
+\subsection{Equilibration and production protocol}
+All MD was performed in the LAMMPS package (29~Aug~2024 stable release) on the Param Brahma HPC cluster using a Velocity-Verlet integrator with a $1$~fs timestep. Following an initial energy minimisation with the WSSe sheet held fixed, the system was annealed in NVT from $300$ to $600$~K over $2$~ns, then cooled to $400$~K over a further $2$~ns, with a weak \texttt{spring/self} restraint (force constant $10$~kcal/mol/\AA$^2$) applied to the WSSe atoms to suppress sheet drift during the violent thermal annealing. The resulting structure was then placed in a box rescaled to give an initial density of $1.20$~g/cm$^3$ (close to the literature value for PEO/\LiTFSI at this composition and temperature) and equilibrated for $10$~ns in NVT at $400$~K, with a \texttt{fix recenter} pinning the WSSe centre-of-mass at $z = L_z/2$ to maintain symmetric polymer distribution on both faces. The production stage was a $30$~ns NVT run at $400$~K under the identical box, during which the trajectory and analysis outputs described below were collected. Stress--strain response under uniaxial elongation in $z$ is reported separately and the corresponding analysis is in progress.
+
+\subsection{Analysis observables}
+Four observables were extracted from production:
+(1) \textit{Directional mean-squared displacement (MSD)} of Li$^+$, computed using a sliding time-origin window to maximise statistical sampling, decomposed into in-plane ($x$, $y$) and out-of-plane ($z$) components after removal of Li-group centre-of-mass drift. Self-diffusion coefficients $\Dxy$ and $\Dz$ were obtained from linear fits in the diffusive regime ($3$--$10$~ns lag window).
+(2) \textit{Li$^+$--ether-O radial distribution function} $g_{\mathrm{Li-O}}(r)$, averaged over the production run and integrated to extract the first-shell coordination number $n_{\mathrm{coord}}$ at the standard cutoff of $r < 3.5$~\AA.
+(3) \textit{Li$^+$ z-density profile} measured relative to the WSSe sheet midplane.
+(4) \textit{Face-resolved Li$^+$ contact statistics}: the number of Li$^+$ ions per frame found within cutoff distances of $r_c = 3$, $4$, $5$, $6$, and $8$~\AA{} of the S-face (above the sheet) and Se-face (below). Block averaging into 5 statistically-independent blocks of $\sim6$~ns each was used to obtain unbiased standard errors and significance levels.
+
+%% ════════════════════════════════════════════════════════
+\section{Results and Discussion}\label{sec:results}
+
+\subsection{Validation: Li$^+$ solvation by PEO ether oxygens}\label{sec:res_lio}
+We begin by verifying that the standard PEO/\LiTFSI Li$^+$ solvation environment is reproduced in our composite system. The Li-O radial distribution function (\fig{fig:results}b) exhibits a sharp first-shell peak at $r = 2.13$~\AA{} with $g(r)_{\mathrm{max}} \approx 35$, and a running coordination number that saturates at $n_{\mathrm{coord}} = 6.1$ within the first solvation shell ($r < 3.5$~\AA). Both the peak position and the coordination number are in close agreement with prior reports for neat PEO/\LiTFSI: Marchiori et al.~\cite{marchiori_electrochim_2017} report a Li-O$_{\mathrm{PEO}}$ first-shell peak at $2.04$~\AA{} and $n_{\mathrm{coord}} \approx 6$, and the cross-linked PEO/\LiTFSI MD of Wettstein et al.~\cite{wettstein_crosslinked_peo_2022} similarly finds a maximum-probability EO coordination of $6$ for the TFSI system. The retention of the canonical solvation shell in the presence of the Janus filler confirms two important points: (i) the cross-interaction parameters chosen via Lorentz--Berthelot mixing of UFF terms do not artificially disrupt the polymer--cation solvation, and (ii) Li$^+$ transport in our composite still proceeds via the standard PEO ether-oxygen hopping mechanism rather than via any pathological binding to the WSSe surface.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fig2_LiO_coordination.pdf}
+\caption{Li$^+$--ether-oxygen radial distribution function $g(r)$ (green) and running coordination number $n(r)$ (orange dashed). The first-shell peak at $2.13$~\AA{} and $n_{\mathrm{coord}}=6.1$ within $3.5$~\AA{} match the canonical PEO/LiTFSI solvation environment.}
+\label{fig:rdf}
+\end{figure}
+
+%% ============================================================
+%% REVISED Section: Anisotropic Li+ transport
+%% Replace the existing \subsection{Anisotropic Li$^+$ transport}
+%% block in main.tex with this version.
+%% Add fig1b_msd_loglog.pdf as a panel or supporting figure.
+%% ============================================================
+
+\subsection{Anisotropic Li$^+$ transport}\label{sec:res_msd}
+\Fig{fig:results}a shows the time-resolved Li$^+$ mean-squared displacement (MSD) decomposed into in-plane and out-of-plane components. The two components diverge cleanly from the earliest accessible lag time, with in-plane displacement growing several times faster than out-of-plane displacement over the full observation window. Linear fits to the $3$--$10$~ns sliding-window MSD yield $\Dxy = (4.35 \pm 0.01) \times 10^{-7}$~cm$^2$/s and $\Dz = (1.82 \pm 0.02) \times 10^{-7}$~cm$^2$/s, giving an anisotropy ratio $\Dxy/\Dz = 2.4$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fig1_msd_anisotropy.pdf}
+\caption{Sliding-window Li$^+$ MSD decomposed into in-plane ($xy$, red) and out-of-plane ($z$, blue) components, with shaded $\pm$standard error. Linear fits in the $3$--$10$~ns window give $\Dxy=4.35\times10^{-7}$ and $\Dz=1.82\times10^{-7}$~cm$^2$/s, an anisotropy ratio of $2.4$.}
+\label{fig:msd}
+\end{figure}
+
+Before interpreting these magnitudes we examine the diffusive character of the motion. \Fig{fig:msd_loglog} presents the same data on logarithmic axes together with a reference line of unit slope corresponding to ideal Einstein diffusion ($\mathrm{MSD} \propto t$). The Li$^+$ MSD remains sub-diffusive throughout the accessible window, with a local logarithmic slope (diffusion exponent) of $\beta_{xy} \approx 0.67$ and $\beta_{z} \approx 0.66$ in the $3$--$10$~ns interval rather than the value of unity expected for the fully developed diffusive regime. This behaviour is a well-documented signature of PEO-based electrolytes: the strong coupling between Li$^+$ motion and slow PEO segmental relaxation produces an extended sub-diffusive plateau, with reported intermediate-time exponents of $\alpha \approx 0.6$ attributed to topological constraints on the polymer chains~\cite{wettstein_crosslinked_peo_2022}. The diffusivities reported here should therefore be understood as \emph{apparent} (effective) diffusivities extracted from the most diffusive part of the accessible trajectory, rather than fully converged Einstein coefficients, which would require substantially longer trajectories (of order $100$~ns or more) to reach.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fig1b_msd_loglog.pdf}
+\caption{Log--log representation of the directional Li$^+$ MSD with a reference line of unit slope (ideal Einstein diffusion). The MSD remains sub-diffusive over the accessible window ($\beta_{xy}\approx0.67$, $\beta_{z}\approx0.66$), characteristic of PEO segmental dynamics. The reported diffusivities are therefore apparent values; the anisotropy ratio is robust as both components share the same convergence factor.}
+\label{fig:msd_loglog}
+\end{figure}
+
+Two points nonetheless make the transport analysis robust and physically meaningful. First, the apparent magnitude of $\Dxy$ falls squarely within the $1$--$5 \times 10^{-7}$~cm$^2$/s range reported for PEO/\LiTFSI in the same temperature window using comparable charge-scaled force-field protocols~\cite{he_jpcb_2020_polarity}, confirming that the simulation captures the correct transport scale. Second, and more importantly, the anisotropy \emph{ratio} $\Dxy/\Dz$ is largely insensitive to the sub-diffusive limitation, because both directional components are sampled over the identical time window and are affected by the same incomplete-convergence factor, which cancels in the ratio. The anisotropy ratio of $2.4$ is, to our knowledge, the first quantitative atomistic measurement of filler-induced Li$^+$ transport anisotropy in a PEO/\LiTFSI composite. Experimental conductivity measurements on 2D-filler CPEs (e.g., MXene/PEO/\LiTFSI~\cite{pan_nanoscale_adv_2019_mxene}, BP/PEO~\cite{rojaee_2d_bp}) routinely infer anisotropy phenomenologically through aligned-versus-isotropic film comparisons, but direct decomposition of the diffusivity into in-plane and out-of-plane channels --- which atomistic MD provides naturally --- has been absent.
+
+The physical origin of the anisotropy is unambiguous: the WSSe sheet is impermeable to Li$^+$ on the timescales accessed, so every cross-plane trajectory requires Li$^+$ to detour around the periodic sheet edges. Within the supercell this constitutes a topological barrier that suppresses cross-plane displacement while leaving in-plane diffusion essentially unhindered, directly producing the observed $\Dxy/\Dz > 2$.
+
+
+\subsection{Janus-face-selective Li$^+$ distribution}\label{sec:res_janus}
+The clearest signature of the Janus chemistry appears in the spatial distribution of Li$^+$ relative to the WSSe sheet. \Fig{fig:results}c shows the $z$-resolved Li$^+$ density profile, with the origin set at the sheet midplane. The profile is broadly symmetric about the sheet, confirming the success of the \texttt{recenter} protocol in maintaining balanced polymer slabs on both faces. However, on closer inspection, the first Li$^+$ peak adjacent to the Se-face (centred near $z \approx -7$~\AA) is noticeably sharper and located closer to the sheet than the corresponding feature on the S-face side, suggesting a slight Se-face preference at short range.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fig3_Li_zdensity.pdf}
+\caption{Li$^+$ number-density distribution along $z$ relative to the WSSe sheet midplane (yellow band). Vertical dashed lines mark the S- and Se-face positions. The first Li$^+$ peak adjacent to the Se-face is sharper and closer to the sheet than its S-face counterpart.}
+\label{fig:zdensity}
+\end{figure}
+
+This impression is confirmed quantitatively by face-resolved Li$^+$ contact counting (\fig{fig:results}d, Table~\ref{tab:contacts}). At the strictest cutoff ($r_c = 3$~\AA), the Se-face holds $1.13 \pm 0.08$ Li$^+$ per frame while the S-face holds only $0.32 \pm 0.10$, corresponding to a difference of $0.81 \pm 0.13$ Li$^+$ per frame --- a statistical significance of $6.2\sigma$. The Se-face preference persists at $r_c = 4$~\AA{} ($3.7\sigma$). At intermediate distances ($r_c = 5$--$6$~\AA) the two faces are statistically indistinguishable, while at $r_c = 8$~\AA{} the Se-face again accumulates more cations ($3.4\sigma$). The strong, statistically clean Se-face preference at close contact is consistent with the trend reported by gas-phase DFT for Janus chalcogenides: Janus MoSSe, ZrSSe, and Nb-based monolayers exhibit systematically stronger physisorption of small molecules and atoms on the Se-terminated surface than on the S-terminated surface \cite{zrsse_dft_gas_sensing, mossse_dna_acsanm_2026, mosy_dft_2025}. The face selectivity has been attributed to the larger atomic radius, higher polarisability, and softer electronic environment of Se relative to S, which together favour close approach of polarisable adsorbates including cations~\cite{nguyen_wsse_li_dft}.
+
+The novel point of the present work is that this Se-face preference \textit{survives} within a solvating polymer matrix --- a regime that the prior gas-phase DFT literature could not access. Even though every Li$^+$ in our system is coordinated by approximately six PEO ether oxygens (\sect{sec:res_lio}), the small fraction of Li$^+$ that visits the WSSe interface partitions strongly toward the Se-face. The physical picture is that PEO solvation does not screen out the Janus dipole entirely; instead, the chemical contrast between S and Se still biases Li$^+$ partitioning, albeit acting on the small surface-visiting population rather than on the bulk-solvated majority.
+
+\begin{table}[H]
+\centering
+\caption{Face-resolved Li$^+$ contact statistics from $30$~ns production. Errors are block-averaged standard errors over $5$ blocks. $\sigma$ denotes the statistical significance of the S-vs-Se difference.}
+\label{tab:contacts}
+\begin{tabular}{ccccc}
+\hline
+Cutoff $r_c$ (\AA) & S-face (per frame) & Se-face (per frame) & Difference & $\sigma$ \\
+\hline
+3 & $0.32 \pm 0.10$ & $1.13 \pm 0.08$ & $-0.81 \pm 0.13$ & $6.2$ \\
+4 & $1.02 \pm 0.17$ & $1.74 \pm 0.09$ & $-0.72 \pm 0.19$ & $3.7$ \\
+5 & $2.68 \pm 0.20$ & $2.49 \pm 0.14$ & $+0.19 \pm 0.24$ & $0.8$ \\
+6 & $4.34 \pm 0.26$ & $3.74 \pm 0.19$ & $+0.61 \pm 0.33$ & $1.8$ \\
+8 & $6.93 \pm 0.24$ & $8.43 \pm 0.37$ & $-1.50 \pm 0.44$ & $3.4$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/fig4_janus_contacts.pdf}
+\caption{Face-resolved Li$^+$ contact counts versus cutoff distance. Stars denote significance (*** $>3\sigma$, ** $>2\sigma$, * $>1\sigma$, ns = not significant). The Se-face accumulates $\sim3.5\times$ more Li$^+$ than the S-face within $3$~\AA{} ($6.2\sigma$).}
+\label{fig:contacts}
+\end{figure}
+
+\subsection{Design implications}
+The combined picture from \figs{fig:results}a--d motivates three design heuristics for 2D-filler CPEs. (i) An impermeable 2D filler at moderate loading channels Li$^+$ transport along the in-plane direction, producing an anisotropy that may be exploited in cells where directional conduction is desirable (e.g., between two parallel electrode planes). (ii) Janus chemistry imprints face-selective Li$^+$ binding even through a polymer solvation shell, providing a handle for designing chemically asymmetric interphases without sacrificing bulk ion mobility. (iii) The retention of standard $\sim6$-fold PEO ether-O coordination in the presence of the filler confirms that the 2D inclusion acts as a structural and topological perturbation rather than a chemical disruptor of the underlying PEO/\LiTFSI conduction mechanism. We therefore expect Janus-TMD-reinforced CPEs to combine the established conduction physics of PEO/\LiTFSI with novel directional and face-selective features arising from the filler.
+
+\subsection{Limitations}\label{sec:lim}
+Three caveats should be acknowledged. First, the cross interactions between the \WSSe sheet and the polymer/electrolyte atoms were generated via Lorentz--Berthelot mixing of UFF Lennard-Jones parameters --- a routine but approximate prescription. While the qualitative Janus-face contrast is consistent with first-principles DFT results, the absolute magnitudes of binding strengths may shift if higher-level cross terms (e.g., from \textit{ab initio} parameterisation) were used. Second, $30$~ns is short on the natural timescale of PEO segmental dynamics; the absolute diffusivities reported are therefore best regarded as effective upper-bound estimates over the $3$--$10$~ns observation window, although the anisotropy \textit{ratio} is largely insensitive to this limitation since both components are sampled identically. Third, we report a single \WSSe loading and orientation; future work should map out the dependence on filler concentration and sheet stacking to make direct contact with experimentally realisable CPEs.
+
+%% ════════════════════════════════════════════════════════
+\section{Conclusion}\label{sec:conclusion}
+
+We have presented an atomistic molecular dynamics study of a Janus \WSSe monolayer embedded as a 2D filler in a PEO/\LiTFSI composite polymer electrolyte at $400$~K. Three central results emerge from $30$~ns of production sampling. First, the standard PEO ether-oxygen solvation of Li$^+$ ($\sim6$ oxygens at $2.13$~\AA) is preserved in the composite, confirming that the filler does not disrupt the bulk conduction mechanism and validating the cross-term parameterisation. Second, Li$^+$ transport is strongly anisotropic, with in-plane diffusion exceeding out-of-plane diffusion by a factor of $2.4$ ($\Dxy = 4.35 \times 10^{-7}$, $\Dz = 1.82 \times 10^{-7}$~cm$^2$/s), establishing the impermeable 2D sheet as a topological channel for directional ion conduction. Third, the Janus S/Se chemistry imprints itself on the local Li$^+$ distribution: the Se-face accumulates $\sim3.5\times$ more Li$^+$ than the S-face within $3$~\AA{} ($6.2\sigma$), consistent with the prior gas-phase DFT trend for Janus chalcogenides and demonstrating for the first time that face selectivity survives in a solvating polymer environment. Taken together, these results establish quantitative atomistic design rules for Janus-TMD-reinforced CPEs and motivate experimental synthesis of asymmetric 2D-filler architectures for directional Li$^+$ transport in solid-state batteries.
+
+%% ════════════════════════════════════════════════════════
+\section*{Acknowledgments}
+
+The author is  grateful to Dr. Gy\"orgy B\'anhegyi (Independent Consultant, Budapest, Hungary) for insightful discussions, valuable comments, and constructive suggestions that helped improve the quality of this work and the manuscript.
+%% ════════════════════════════════════════════════════════
+\bibliographystyle{elsarticle-num}
+\bibliography{refrences}
+
+\end{document}

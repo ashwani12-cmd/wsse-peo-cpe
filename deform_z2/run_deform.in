@@ -1,0 +1,134 @@
+units           real
+atom_style      full
+boundary        p p p
+timestep        1.0
+processors      4 4 3
+
+read_restart    prod_end.restart
+
+pair_style      hybrid/overlay sw/mod lj/cut/coul/long 12.0 12.0
+bond_style      harmonic
+angle_style     harmonic
+dihedral_style  opls
+improper_style  none
+kspace_style    pppm 1.0e-4
+
+pair_coeff * * sw/mod tmd.sw.mod NULL NULL NULL NULL NULL NULL NULL NULL NULL W S Se
+pair_coeff  1  1  lj/cut/coul/long  0.0660  3.5000
+pair_coeff  2  2  lj/cut/coul/long  0.0300  2.5000
+pair_coeff  3  3  lj/cut/coul/long  0.1200  2.9000
+pair_coeff  4  4  lj/cut/coul/long  0.0180  2.1260
+pair_coeff  5  5  lj/cut/coul/long  0.1700  3.2500
+pair_coeff  6  6  lj/cut/coul/long  0.2500  3.5500
+pair_coeff  7  7  lj/cut/coul/long  0.2100  2.9600
+pair_coeff  8  8  lj/cut/coul/long  0.0660  3.5000
+pair_coeff  9  9  lj/cut/coul/long  0.0530  2.9500
+pair_coeff 10 10  lj/cut/coul/long  0.0570  2.7340
+pair_coeff 11 11  lj/cut/coul/long  0.2740  3.5940
+pair_coeff 12 12  lj/cut/coul/long  0.2910  3.7460
+pair_coeff  1 10  lj/cut/coul/long  0.0613  3.1170
+pair_coeff  1 11  lj/cut/coul/long  0.1345  3.5470
+pair_coeff  1 12  lj/cut/coul/long  0.1386  3.6230
+pair_coeff  2 10  lj/cut/coul/long  0.0414  2.6170
+pair_coeff  2 11  lj/cut/coul/long  0.0907  3.0470
+pair_coeff  2 12  lj/cut/coul/long  0.0934  3.1230
+pair_coeff  3 10  lj/cut/coul/long  0.0827  2.8170
+pair_coeff  3 11  lj/cut/coul/long  0.1814  3.2470
+pair_coeff  3 12  lj/cut/coul/long  0.1868  3.3230
+pair_coeff  4 10  lj/cut/coul/long  0.0320  2.4300
+pair_coeff  4 11  lj/cut/coul/long  0.0702  2.8600
+pair_coeff  4 12  lj/cut/coul/long  0.0724  2.9360
+pair_coeff  5 10  lj/cut/coul/long  0.0984  2.9920
+pair_coeff  5 11  lj/cut/coul/long  0.2158  3.4220
+pair_coeff  5 12  lj/cut/coul/long  0.2224  3.4980
+pair_coeff  6 10  lj/cut/coul/long  0.1194  3.1420
+pair_coeff  6 11  lj/cut/coul/long  0.2617  3.5720
+pair_coeff  6 12  lj/cut/coul/long  0.2697  3.6480
+pair_coeff  7 10  lj/cut/coul/long  0.1094  2.8470
+pair_coeff  7 11  lj/cut/coul/long  0.2399  3.2770
+pair_coeff  7 12  lj/cut/coul/long  0.2472  3.3530
+pair_coeff  8 10  lj/cut/coul/long  0.0613  3.1170
+pair_coeff  8 11  lj/cut/coul/long  0.1345  3.5470
+pair_coeff  8 12  lj/cut/coul/long  0.1386  3.6230
+pair_coeff  9 10  lj/cut/coul/long  0.0550  2.8420
+pair_coeff  9 11  lj/cut/coul/long  0.1205  3.2720
+pair_coeff  9 12  lj/cut/coul/long  0.1242  3.3480
+pair_modify mix arithmetic
+kspace_modify mesh 32 32 64 order 6
+
+bond_coeff  1   268.0  1.5290
+bond_coeff  2   340.0  1.0900
+bond_coeff  3   320.0  1.4100
+bond_coeff  4   361.0  1.5700
+bond_coeff  5   637.0  1.4370
+bond_coeff  6   272.0  1.8180
+bond_coeff  7   367.0  1.3230
+
+angle_coeff  1   33.0  107.8
+angle_coeff  2   37.5  110.7
+angle_coeff  3   35.0  109.5
+angle_coeff  4   50.0  109.5
+angle_coeff  5   60.0  109.5
+angle_coeff  6   35.0  125.6
+angle_coeff  7   80.0  113.6
+angle_coeff  8   55.0  100.2
+angle_coeff  9   90.0  118.5
+angle_coeff 10   72.0  106.7
+angle_coeff 11   55.0  111.7
+angle_coeff 12   55.0  107.1
+
+dihedral_coeff  1   0.0000  0.0000  0.3000  0.0000
+dihedral_coeff  2   0.0000  0.0000  0.4680  0.0000
+dihedral_coeff  3   0.6500 -0.2500  0.6700  0.0000
+dihedral_coeff  4   0.0000  0.0000  0.7600  0.0000
+dihedral_coeff  5   0.0000  0.0000  1.1790  0.0000
+dihedral_coeff  6   0.6500 -0.2500  0.6700  0.0000
+
+special_bonds lj/coul 0.0 0.0 0.5
+comm_modify cutoff 20.0
+
+group  WSSe     type 10 11 12
+group  Li       type 4
+
+neighbor        2.0  bin
+neigh_modify    every 1 delay 0 check yes
+
+# ============ STAGE 1: re-equilibrate at zero stress (uniaxial setup) ============
+print ">>> Pre-deform equilibration (NPT all sides free, 500 ps)"
+fix  preq  all  npt  temp  400.0  400.0  100.0  iso  1.0  1.0  1000.0
+thermo  5000
+thermo_style  custom  step  temp  press  density  lx  ly  lz
+run  500000
+unfix  preq
+write_data  predeform.data
+print ">>> Pre-deform done"
+
+# ============ STAGE 2: capture L0 NOW, then deform z, xy free ============
+variable  L0  equal  lz
+print "Initial Lz (L0) = ${L0}"
+
+# Uniaxial stress: stretch z, xy free to contract to ~zero stress
+fix  defNPT  all  npt  temp  400.0  400.0  100.0  x  1.0  1.0  1000.0  y  1.0  1.0  1000.0
+fix  defZ   all  deform  1  z  erate  1.0e-7  remap x
+
+# Stress: -pzz in GPa (real units: pressure in atm; 1 atm = 1.01325e-4 GPa)
+compute  myT  all  temp
+compute  myP  all  pressure  myT
+variable  pzz_var  equal  c_myP[3]
+variable  strain   equal  (lz-v_L0)/v_L0
+variable  stress_z equal  -v_pzz_var*1.01325e-4
+
+# Average stress over 1000-step windows to kill thermal noise
+fix  out_ss  all  ave/time  10  100  1000  v_strain  v_stress_z  file  stress_strain_z.dat  title1 "# strain stress_GPa"
+
+dump  d_def  all  custom  100000  deform.lammpstrj  id type x y z
+dump_modify  d_def  sort id
+thermo  10000
+thermo_style  custom  step  temp  c_myP[3]  v_strain  v_stress_z  lx  ly  lz
+
+# 30 ns deform at erate 1e-7 -> 0.3% strain.
+# WAIT - that's too slow. At erate 1e-7/step over 30M steps = 3% strain. Good!
+# This gives us full elastic regime data with noise averaged out.
+run  30000000
+write_data  deformed_z.data
+print ">>> ALL DONE"
